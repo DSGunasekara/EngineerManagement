@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.forms.widgets import DateInput, TimeInput
 from users.models import Profile
 from .models import Job
 
@@ -8,6 +9,14 @@ USER_ROLES = [
     ('field_engineer', 'Field Engineer'),
     ('manager', 'Manager')
 ]
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
 
 
 class UserRegisterForm(UserCreationForm):
@@ -55,8 +64,8 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
 class JobAddForm(forms.ModelForm):
-    date = forms.DateField()
-    time = forms.TimeField()
+    date = forms.DateField(widget=DateInput)
+    time = forms.TimeField(widget=TimeInput)
     status = forms.CharField(max_length=200)
     location = forms.CharField(max_length=200)
     description = forms.CharField(max_length=200)
