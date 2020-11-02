@@ -1,3 +1,4 @@
+from django.db.models import manager
 from django.shortcuts import render, redirect
 from .models import Job
 from users.models import Profile
@@ -7,7 +8,7 @@ from django.contrib import messages
 
 def engineers(request):
     context = {
-        'engineers': Profile.objects.all()
+        'engineers': Profile.objects.filter(role="field_engineer")
     }
     return render(request, 'engineer/home.html', context)
 

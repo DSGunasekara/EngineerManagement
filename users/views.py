@@ -1,20 +1,30 @@
 from django.shortcuts import render, redirect
-from jobs.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from jobs.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, ProfileCreateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
+        u_form = UserRegisterForm(request.POST, prefix="user")
+        p_form = ProfileCreateForm(request.POST, prefix="profile")
+        if u_form.is_valid() and p_form.is_valid():
+            user = u_form.save(commit=False)
+            user.save()
+            profile = p_form.save(commit=False)
+            profile.user = user
+            profile.save()
             messages.success(
                 request, f'Account was created! You can now log in')
             return redirect('login')
     else:
-        form = UserRegisterForm()
-    return render(request, 'users/register.html', {'form': form})
+        u_form = UserRegisterForm(prefix="user")
+        p_form = ProfileCreateForm(prefix="profile")
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'users/register.html', context)
 
 
 @login_required

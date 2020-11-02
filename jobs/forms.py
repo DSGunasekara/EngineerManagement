@@ -55,6 +55,19 @@ class ProfileUpdateForm(forms.ModelForm):
     contact_no = forms.CharField(max_length=200)
     state = forms.CharField(max_length=200)
     country = forms.CharField(max_length=200)
+
+    class Meta:
+        model = Profile
+        fields = ['full_name', 'passport_no',
+                  'contact_no', 'state', 'country']
+
+
+class ProfileCreateForm(forms.ModelForm):
+    full_name = forms.CharField(max_length=200)
+    passport_no = forms.CharField(max_length=200)
+    contact_no = forms.CharField(max_length=200)
+    state = forms.CharField(max_length=200)
+    country = forms.CharField(max_length=200)
     role = forms.ChoiceField(choices=USER_ROLES)
 
     class Meta:
