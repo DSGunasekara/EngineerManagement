@@ -1,18 +1,37 @@
-{% extends 'base.html' %}
-{% block content %}
-    {% for job in jobs %}
-        <div class="card mt-2">
-          <div class="card-body">
-            <h5 class="card-title">Name: {{job.location}}</h5>
-            <p class="card-text">Date: {{ job.date }}</p>
-            <p class="card-text">Time: {{ job.time }}</p>
-              <p class="card-text">Status: {{ job.status }}</p>
-              <p class="card-text">Description: {{ job.description }}</p>
-              <p class="card-text">SVR ID: {{ job.SVR_ID }}</p>
-              <p class="card-text">LCON Name: {{ job.LCON_name }}</p>
-              <p class="card-text">LCON Contact No: {{ job.LCON_contact_no }}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h1>Jobs</h1>
+  {% for job in jobs %}
+  <div class="row">
+    <div class="card" style="width: 100%;">
+      <div class="row m-2">
+        <div class="col-md-2">
+          <div class="card-title">Title</div>
+          <div class="card-text">{{ job.location }}</div>
+        </div>
+        <div class="col-md-2">
+          <div class="card-title">Date</div>
+          <div class="card-text">{{ job.date }}</div>
+        </div>
+        <div class="col-md-1">
+          <div class="card-title">Time</div>
+          <div class="card-text">{{ job.time }}</div>
+        </div>
+        <div class="col-md-3">
+          <div class="card-title">Description</div>
+          <div class="card-text">{{ job.description }}</div>
+        </div>
+        <div class="col-md-2">
+          <div class="card-title">Customer Name</div>
+          <div class="card-text">{{ job.LCON_name }}</div>
+        </div>
+        <div class="col-md-2">
+          <div class="card-title">Customer Contact No</div>
+          <div class="card-text">{{ job.LCON_contact_no }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
-    {% endfor %}
 {% endblock content %}

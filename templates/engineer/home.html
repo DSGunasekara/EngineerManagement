@@ -1,17 +1,23 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row row-cols-3">
     {% for engineer in engineers %}
-        <div class="card mt-2 text-center">
-          <div class="card-body">
-            <h5 class="card-title">Name: {{engineer.full_name}}</h5>
-            <p class="card-text">Contact No: {{ engineer.contact_no }}</p>
-              <p class="card-text">Email: {{ engineer.user.email }}</p>
-{#              <p class="card-text">Passport No: {{ engineer.passport_no }}</p>#}
-{#              <p class="card-text">Country: {{ engineer.country }}</p>#}
-              <p class="card-text">State: {{ engineer.state}}</p>
-            <a href="#" class="btn btn-primary">View Profile</a>
-          </div>
-</div>
+    <div class="col">
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">
+            <i class="fas fa-user-alt"></i> Name: {{engineer.full_name}}
+          </h5>
+          <p class="card-text">Contact No: {{ engineer.contact_no }}</p>
+          <p class="card-text">Email: {{ engineer.user.email }}</p>
+          <p class="card-text">State: {{ engineer.state}}</p>
+          <p class="card-text">Country: {{ engineer.country }}</p>
+          <a href="#" class="btn btn-primary">View Profile</a>
+        </div>
+      </div>
+    </div>
     {% endfor %}
-{% endblock content %}
+  </div>
+</div>
 
+{% endblock content %}
